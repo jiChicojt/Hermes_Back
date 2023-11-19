@@ -47,9 +47,14 @@ def generate_random_route():
 
 def evaluate_route(route_connections):
     total_distance = 0
+    total_time = 0
+    total_complexity = 0
+
     for connection in route_connections:
         total_distance += connection[1]
-    return total_distance
+        total_time += connection[2]
+        total_complexity += connection[3]
+    return 0.4*total_distance + 0.4*total_time + 0.2*total_complexity
 
 def selection(population):
     random_routes = random.sample(population, sel)
