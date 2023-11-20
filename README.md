@@ -13,7 +13,7 @@ This system focuses on solving the TSP, a classic optimization challenge, throug
 
 ### `main.py`
 - **Route Calculation:** Processes route requests sent from the user interface.
-- **CORS Connection:** Configures CORS policies to allow access from `localhost:4200` and `localhost`.
+- **CORS Connection:** Configures CORS policies to allow access from `localhost`.
 
 ### `geneticAlgorithm.py`
 - **Conversion to Distances:** Converts output routes into distances for processing.
