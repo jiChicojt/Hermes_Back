@@ -22,6 +22,12 @@ async def route(routes: list[Routes], origin: str):
     distances_conv = ga.convert_to_distances(routes)
     ga.distances = distances_conv
     ga.origen = origin
-    full_route = ga.genetic_algorithm()
+    try:
+        full_route = ga.genetic_algorithm()
+        ga.max_values = []
+        ga.avg_values = []
+        ga.min_values = []
+    except Exception as e:
+        full_route = None
 
     return full_route

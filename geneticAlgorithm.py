@@ -4,8 +4,9 @@ import matplotlib.pyplot as plt
 origen = ''
 distances = {}
 population = []
-population_size = 25
+population_size = 30
 num_generations = 30
+mutation_rate = 0.2
 sel = 3
 
 max_values = []
@@ -67,6 +68,12 @@ def combinar_genes(caso1, caso2):
             return None
     return [caso1 + caso2 ]
 
+def mutation(child):
+    if random.random() < mutation_rate:
+        index1, index2 = random.sample(range(1, len(child)), 2)
+        child[index1], child[index2] = child[index2], child[index1]
+    return child
+
 def crossover(parent1, parent2):
     while True:
         crossover_point = random.randint(0, len(parent1[1]) - 1)
@@ -98,18 +105,15 @@ def get_route_details(route):
 def genetic_algorithm():
     population = [generate_random_route() for _ in range(population_size)]
     for generation in range(num_generations):
-        # print(f"Generación {generation + 1}:")
         val_gen = []
         new_pop = []
         for individual in population:
             distance_route = evaluate_route(individual[1])
             val_gen.append(distance_route)
-            # print(individual, distance_route)
-            
+
         for _ in range(population_size):
             selected_individuals = selection(population)
             children = crossover(selected_individuals[0], selected_individuals[1])
-            # mutated_children = [mutation(child) for child in children]
             new_pop.append(children)
 
         population = new_pop
@@ -128,8 +132,8 @@ def genetic_algorithm():
     print("\nCaminos a tomar:")
     for detail in details:
         print(detail)
-    print(f"\nDistancia total: {total_distance} m")
     showGraph()
+    print(f"\nDistancia total: {total_distance} m")
     return {"routes": full_route}
 
 def showGraph():
